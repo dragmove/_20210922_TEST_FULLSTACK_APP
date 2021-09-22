@@ -26,7 +26,7 @@ app.use("/api/values", (req, res) => {
   });
 });
 
-app.post("/api/values", (req, res, next) => {
+app.post("/api/value", (req, res, next) => {
   db.pool.query(
     `INSERT INTO lists (value) VALUES("${req.body.value}")`,
     (err, results, fields) => {
