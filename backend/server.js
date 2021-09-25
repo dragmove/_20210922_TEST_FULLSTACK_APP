@@ -3,17 +3,17 @@ const db = require("./db");
 
 const app = express();
 
-db.pool.query(
-  `CREATE TABLE lists (
-    id INTEGER AUTO_INCREMENT,
-    value TEXT,
-    PRIMARY KEY (id)
-  )`,
-  (err, results, fields) => {
-    console.error(err);
-    console.log("results :", results);
-  }
-);
+// db.pool.query(
+//   `CREATE TABLE lists (
+//     id INTEGER AUTO_INCREMENT,
+//     value TEXT,
+//     PRIMARY KEY (id)
+//   )`,
+//   (err, results, fields) => {
+//     console.error(err);
+//     console.log("results :", results);
+//   }
+// );
 
 app.use("/api/values", (req, res) => {
   db.pool.query("SELECT * FROM lists;", (err, results, fields) => {
