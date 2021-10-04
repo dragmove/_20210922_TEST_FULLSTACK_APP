@@ -1,5 +1,6 @@
 FROM node:alpine as builder
 LABEL maintainer="dragmove <dragmove@gmail.com>"
+LABEL stage=builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
