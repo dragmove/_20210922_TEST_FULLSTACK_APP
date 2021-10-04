@@ -13,9 +13,9 @@ script:
 
 after_success:
   # 각 service의 docker image build
-  - docker build -t dragmove/docker-fullstack-frontend ./frontend/Dockerfile ./frontend
-  - docker build -t dragmove/docker-fullstack-backend ./backend/Dockerfile ./backend
-  - docker build -t dragmove/docker-fullstack-nginx ./nginx/Dockerfile ./nginx
+  - docker build -t dragmove/docker-fullstack-frontend ./frontend
+  - docker build -t dragmove/docker-fullstack-backend ./backend
+  - docker build -t dragmove/docker-fullstack-nginx ./nginx
 
   # docker hub login
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
