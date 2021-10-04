@@ -1,0 +1,26 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t dragmove/test-fullstack-app -f ./frontend/Dockerfile.dev ./frontend
+
+script:
+  - docker run -e CI=true dragmove/test-fullstack-app npm run test
+
+after_success:
+  # 각 service의 docker image build
+  - docker build -t dragmove/docker-fullstack-frontend ./frontend/Dockerfile ./frontend
+  - docker build -t dragmove/docker-fullstack-backend ./backend/Dockerfile ./backend
+  - docker build -t dragmove/docker-fullstack-nginx ./nginx/Dockerfile ./nginx
+
+  # docker hub login
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+
+  # push images to docker hub
+  - docker push dragmove/docker-fullstack-frontend
+  - docker push dragmove/docker-fullstack-backend
+  - docker push dragmove/docker-fullstack-nginx
