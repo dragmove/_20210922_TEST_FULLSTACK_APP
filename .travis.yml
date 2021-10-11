@@ -6,9 +6,11 @@ services:
   - docker
 
 before_install:
+  # 테스트를 수행할 frontend app docker image 생성
   - docker build -t dragmove/test-fullstack-app -f ./frontend/Dockerfile.dev ./frontend
 
 script:
+  # frontend app 테스트 수행
   - docker run -e CI=true dragmove/test-fullstack-app npm run test
 
 after_success:
